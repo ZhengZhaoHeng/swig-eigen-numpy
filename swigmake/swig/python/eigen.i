@@ -72,7 +72,9 @@
     // Check data type
     else if (array_type(in) != NumPyType<typename Derived::Scalar>())
     {
-      PyErr_SetString(PyExc_ValueError, "Type mismatch between NumPy and Eigen objects.");
+      char type_err[1000];
+      sprintf(type_err, "Type mismatch between NumPy and Eigen objects. %d %d", array_type(in), NumPyType<typename Derived::Scalar>());
+      PyErr_SetString(PyExc_ValueError, type_err);
       return false;
     }
     // Check dimensions
@@ -215,6 +217,7 @@
 
   template<> int NumPyType<double>() {return NPY_DOUBLE;};
   template<> int NumPyType<int>() {return NPY_INT;};
+  template<> int NumPyType<float>() {return NPY_FLOAT;};
 %}
 
 // ----------------------------------------------------------------------------

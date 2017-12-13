@@ -9,6 +9,7 @@ inv = pyinverter.Inverter()
 m = np.array([[2.0, 0.0],
               [0.0, 2.0]])
 # Call a C++ method with a Numpy array.
+inv.getInverse()
 print(inv.getInverse(m))
 
 # We defined getInversePlus1 in python in pyinverter/extensions.py. But we attached it to the Inverter class, so we can call it just like a C++ method:
